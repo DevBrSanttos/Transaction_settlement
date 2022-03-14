@@ -1,0 +1,29 @@
+{
+  "name": "seller_information",
+  "version": "1.0.0",
+  "description": "API data seller, mongoDb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevBrSanttos/Transaction_settlement.git"
+  },
+  "author": "Bruno da cruz santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DevBrSanttos/Transaction_settlement/issues"
+  },
+  "homepage": "https://github.com/DevBrSanttos/Transaction_settlement#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
