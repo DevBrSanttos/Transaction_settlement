@@ -1,0 +1,212 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API manipulation sellers",
+        "description": "This API is intended to manipulate sellers data",
+        "contact": {
+            "email": "brunocruz55171@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/v1/sellers",
+            "description": "API test"
+        }
+    ],
+    "paths": {
+        "/": {
+            "post": {
+                "summary": "Register seller",
+                "description": "Router responsible for registering seller",
+                "tags": ["Sellers"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Seller"
+                            },
+                            "examples": {
+                                "schema": {
+                                    "value": {
+                                        "seller_id": 1,
+                                        "name": "McDonalds",
+                                        "cnpj": "90891366000190",
+                                        "bankCode": 33,
+                                        "bankAccount": 1000,
+                                        "notes": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Find all sellers with page",
+                "description": "Router responsible for finding sellers with filter and by page",
+                "tags": ["Sellers"],
+                "parameters":[
+                    {
+                        "name": "seller_id",
+                        "in": "query",
+                        "description": "seller_id"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "name"
+                    },
+                    {
+                        "name": "cnpj",
+                        "in": "query",
+                        "description": "CNPJ"
+                    },
+                    {
+                        "name": "bankCode",
+                        "in": "query",
+                        "description": "Bank code"
+                    },
+                    {
+                        "name": "bankAccount",
+                        "in": "query",
+                        "description": "bank account"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Current page",
+                        "required": true
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Seller"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        },
+        "/{id}": {
+            "get": {
+                "description": "Find seller by seller_id",
+                "summary": "Find seller by seller_id",
+                "tags": ["Sellers"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "seller_id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Seller"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Update seller by seller_id",
+                "summary": "Update",
+                "tags": ["Sellers"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "seller_id",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json":{
+                            "schema": {
+                                "$ref": "#/components/schemas/Seller"
+                            },
+                            "examples": {
+                                "schema": {
+                                    "value": {
+                                        "seller_id": 1,
+                                        "name": "McDonalds",
+                                        "cnpj": "90891366000190",
+                                        "bankCode": 33,
+                                        "bankAccount": 1000,
+                                        "notes": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Seller" : {
+                "type": "object",
+                "properties": {
+                    "seller_id": {
+                        "type": "number"
+                    },
+                    "name":{
+                        "type": "string"
+                    },
+                    "cnpj":{
+                        "type": "string"
+                    },
+                    "bankCode":{
+                        "type": "number"
+                    },
+                    "bankAccount":{
+                        "type": "number"
+                    },
+                    "notes":{
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
