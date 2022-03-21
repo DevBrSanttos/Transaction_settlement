@@ -12,8 +12,10 @@ app.use(cors());
 app.use(express.json());
 
 //routers
+
 app.use('/v1/sellers', SellerRt);
 app.use('/v1', swaggerUi.serve, swaggerUi.setup(swaggerJson));
+
 
 const createServer = async () => {
     await connectMongoDb().catch((err) => {

@@ -1,31 +1,36 @@
 const Seller = require('../models/Seller');
-const objId = require('mongoose');
-const { countDocuments } = require('../models/Seller');
+const sellerServices = require('../services/SellerServices');
 
 const SellerController = class {
     
     static async getSellerById(req, res){
-        const id = req.params.id;
-        const seller = await Seller.findOne({ seller_id : id });
+        const seller = await sellerServices.getById(req, res);
+        if(!seller)
+            return
+        
         res.status(200).json({seller});
     }
 
-    static async registerSeller(req, res){
-        const seller = new Seller(req.body);
+    static async insertSeller(req, res){
+
+        const seller = await sellerServices.insertSeller(req, res);
+        if(!seller)
+            return
         try {
             seller.save();
             res.status(201).json();
-        } catch (error) {
+        } catch (err) {
             res.status(500).json({ message: err });
         }
     }
 
     static async updateSeller(req, res){
-        const { notes } = req.body;
-        const id = req.params.id;
-
+        const seller = sellerServices.updateSeller(req, res);
+        if(!seller)
+            return
+        
         try {
-            await Seller.updateOne({ seller_id : id }, { $set: { notes : notes } });
+            await Seller.updateOne({ seller_id : seller.seller_id }, { $set: seller });
             res.status(200).json();
         } catch (err) {
             console.log(`Error: ${err}`);
@@ -34,19 +39,20 @@ const SellerController = class {
     }
 
     static async findPage(req, res){
-        const { page, pageSize, ...obj } = req.query;
+        const { page, pageSize, ...filters } = req.query;
 
         const pageNumber = (page - 1) * pageSize;
-        const result = await Seller.find(obj)
+        const result = await Seller.find(filters)
                                    .skip(pageNumber).limit(pageSize);
         
         const totalItens = result.length;
-        let totalPages = Math.ceil(await Seller.countDocuments() / pageSize);
+        let totalPages = Math.ceil(await Seller.find(filters).count() / pageSize);
         totalPages = totalPages > 0 ? totalPages : 1;
 
         res.status(200).json({page, pageSize, totalItens, totalPages, result});
     }
 
 }
+
 
 module.exports = SellerController;
