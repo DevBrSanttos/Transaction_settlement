@@ -3,25 +3,33 @@ const Message = require('./src/models/Message');
 
 const createCalculatorChannel = require('./src/channel/calculatorChannel');
 
-const generateCalculatorConsumer = async (queue) => {
+
+async function calculateTaxAndSendMessage(channel, message){
+
+    const newMessage = new Message(message.seller_id, message.amount);
+    console.log("Message received: ");
+    console.log(newMessage);
+
+    newMessage.calculateTax();
+
+     const newMessageJson = JSON.stringify(newMessage);
+     await channel.sendToQueue(process.env.QUEUE_TAX_CALCULATION_RESPONSE, Buffer.from(newMessageJson));
+     console.log('New message publish to queue');
+}
+
+
+const consumerMessages = async (queue) => {
     const calculatorChannel = new createCalculatorChannel();
     const channel = await calculatorChannel.createCalculatorChannel();
 
     channel.consume(queue, async msg => {
-        console.log('Message received');
         const message = JSON.parse(msg.content.toString());
-        
-        const newMessage = new Message(message.seller_id, message.amount);
-        newMessage.calculateTax();
-        
         await channel.ack(msg);
 
-        const newMessageJson = JSON.stringify(newMessage);
-        await channel.sendToQueue(process.env.QUEUE_TAX_CALCULATION_RESPONSE, Buffer.from(newMessageJson));
-        console.log('New message publish');
-        
+        await calculateTaxAndSendMessage(channel, message);
     });
 }
 
-generateCalculatorConsumer(process.env.QUEUE_TAX_CALCULATION_REQUEST);
+
+consumerMessages(process.env.QUEUE_TAX_CALCULATION_REQUEST);
 
