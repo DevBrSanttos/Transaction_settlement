@@ -15,7 +15,7 @@ const publishMessage = async (queue) => {
 
             const messageJson = JSON.stringify(message);
 
-            await calculatorChannel.publishMessage(channel, messageJson, queue);
+            await channel.sendToQueue(queue, Buffer.from(messageJson));
 
             console.log('Message send to queue');
             await new Promise(r => setTimeout(r, 5000));
