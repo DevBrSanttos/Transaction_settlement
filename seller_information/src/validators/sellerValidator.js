@@ -9,11 +9,11 @@ function validateSeller(){
 }
 
 const schema = yup.object().shape({
-    seller_id: yup.number().required("id obrigatório"), 
-    name: yup.string().required("Nome obrigatório"), 
-    cnpj: yup.string().required("CNPJ obrigatório"), 
-    bankCode: yup.number().required("Código do banco obrigatório"), 
-    bankAccount: yup.number().required("Conta obrigatória")
+    seller_id: yup.number().required("Id is required"), 
+    name: yup.string().required("Name is required"), 
+    cnpj: yup.string().required("CNPJ is required"), 
+    bankCode: yup.number().required("Bank code is required"), 
+    bankAccount: yup.number().required("Bank account is required")
 });
 
 
@@ -31,7 +31,7 @@ validateSeller.prototype.cnpjIsValid = async (req) => {
     if(isCnpj(req.body.cnpj))
         return true;
     
-    let msg = new defaultMessage("CNPJ", "CNPJ inválido");
+    let msg = new defaultMessage("CNPJ", "CNPJ invalid");
     errors.push(msg);
 }
 
@@ -39,7 +39,7 @@ validateSeller.prototype.sellerByIdExists = async (id, addListErrors) => {
     const seller = await Seller.findOne({ seller_id: id });
 
     if(addListErrors){
-        let msg = new defaultMessage("seller_id", "id já cadastrado");
+        let msg = new defaultMessage("seller_id", "Id is registered");
         errors.push(msg)
     }
         
