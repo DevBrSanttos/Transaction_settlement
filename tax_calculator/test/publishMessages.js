@@ -1,6 +1,6 @@
 require('dotenv').config();
-const Message = require('./src/models/Message');
-const createCalculatorChannel = require('./src/channel/calculatorChannel');   
+const Message = require('../src/models/Message');
+const createCalculatorChannel = require('../src/channel/calculatorChannel');   
 
 let channel;
 
@@ -34,7 +34,7 @@ const main = async() => {
     
     for(let i = 0; i < 10; i++){
         message.seller_id = Math.floor((Math.random() * 100));
-        message.amount = Math.floor((Math.random() * 10000));
+        message.amount = Math.floor((Math.random() * 100000));
         const messageJson = JSON.stringify(message);
 
         await publishAndConsumerNewMessage(process.env.QUEUE_TAX_CALCULATION_REQUEST, messageJson);
