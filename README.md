@@ -21,17 +21,21 @@
 Desenvolvido uma API RestFull para realizar as funções de CRUD de um Seller
 ### - Via terminal WSL
 1. Entre no diretorio seller_information. 
-2. Instale as dependências do projeto com o comando `npm intall`.
-3. Volte em seu diretório raiz e rode o Docker compose com o comando `docker-compose up`
-4. Entre no diretôrio seller_information/src
-5. Inicializar projeto: Rode o comando node index.js
+2. Instale as dependências do projeto com o comando `npm install`.
+3. Volte em seu diretório raiz e rode o Docker com o comando `docker-compose up` ou `podman-compose up`
+4. Entre no diretôrio seller_information
+5. Rode o comando `npm start` para iniciar o projeto
 6. Para acessar a API via swagger utilize o link: http://localhost:3000/v1/#/Sellers
-7. Caso deseje rodar os testes automatizados localizados no diretôrio test, entre nele e rode o comando npm run test
+7. Caso deseje rodar os testes automatizados localizados no diretôrio test rode o comando `npm run test`
  
  
- ### Tax calculator
+### Tax calculator
+Desenvolvido um microsserviço com rabbitMQ capaz de calcular imposto.
+### - Via terminal WSL
 1. Entre no diretorio tax_calculator. 
-2. Instale as dependências do projeto com o comando `npm intall`.
-3. Volte em seu diretório raiz e rode o Docker compose com o comando `docker-compose up`
-4. Entre no diretôrio seller_information/src
-5. Inicializar projeto: Rode o comando node index.js
+2. Instale as dependências do projeto com o comando `npm install`.
+3. Volte em seu diretório raiz e rode o Docker com o comando `docker-compose up` ou `podman-compose up`
+4. Entre no diretôrio tax_calculator
+5. Rode o comando `node index.js` para iniciar o projeto
+6. para acessar o rabbitMQ basta utilize o link: http://localhost:15672/#/ com user: dev e password: 123456
+7. Caso deseje rodar um código que publica as mensagens e consome outras com o imposto calculado rodar o comando `npm run test`
