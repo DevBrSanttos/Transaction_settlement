@@ -38,4 +38,4 @@ Desenvolvido um microsserviço com rabbitMQ capaz de calcular imposto.
 4. Entre no diretôrio tax_calculator
 5. Rode o comando `node index.js` para iniciar o projeto
 6. para acessar o rabbitMQ basta utilize o link: http://localhost:15672/#/ com user: dev e password: 123456
-7. Caso deseje rodar um código que publica as mensagens e consome outras com o imposto calculado rodar o comando `npm run test`
+7. Caso deseje rodar um código que publica as mensagens e consome outras com o imposto calculado basta em um novo terminal rodar o comando `npm run test`
