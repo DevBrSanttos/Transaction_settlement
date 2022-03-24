@@ -1,5 +1,4 @@
 require('dotenv').config();
-require('dotenv').config();
 let chai = require('chai');
 let chatHttp = require('chai-http');
 let should = chai.should();
@@ -9,7 +8,7 @@ chai.use(chatHttp);
 describe('Sellers', () => {
 
     it('GET: Check status 404, getById - seller_id not found', (done) => {
-        const seller_id = 203;
+        const seller_id = 10;
         chai.request(process.env.DEFAULT_URL_SERVER)
             .get(`/v1/sellers/${seller_id}`)
             .end((err, res) => {
@@ -20,7 +19,7 @@ describe('Sellers', () => {
     });
 
     it('GET: Check status 200, getById - seller_id success', (done) => {
-        const seller_id = 100;
+        const seller_id = 1;
         chai.request(process.env.DEFAULT_URL_SERVER)
             .get('/v1/sellers/' + seller_id)
             .end((err, res) => {
@@ -31,7 +30,7 @@ describe('Sellers', () => {
 
     it('POST: Check status 400, Insert - Seller params required', (done) => {
         const seller = {
-            seller_id: 2,
+            seller_id: 11,
             name: "",
             cnpj: "90891366000190",
             bankCode: 33,
@@ -50,7 +49,7 @@ describe('Sellers', () => {
 
     it('POST: Check status 409, Insert - seller_id exists', (done) => {
         const seller = {
-            seller_id: 100,
+            seller_id: 1,
             name: "BK",
             cnpj: "90891366000190",
             bankCode: 33,
@@ -69,7 +68,7 @@ describe('Sellers', () => {
 
     // it('POST: Check status 201, Insert - seller success', (done) => {
     //     const seller = {
-    //         seller_id: 402,
+    //         seller_id: 4,
     //         name: "BkDonalds",
     //         cnpj: "90891366000190",
     //         bankCode: 33,
@@ -88,7 +87,7 @@ describe('Sellers', () => {
 
     it('PATCH: Check status 404, Update - seller_id not found', (done) => {
         const seller = {
-            seller_id: 24,
+            seller_id: 20,
             name: "BkDonalds",
             cnpj: "90891366000190",
             bankCode: 33,
@@ -106,7 +105,7 @@ describe('Sellers', () => {
     
     it('PATCH: Check status 200, update - Seller success', (done) => {
         const seller = {
-            seller_id: 100,
+            seller_id: 1,
             name: "BkDonalds",
             cnpj: "90891366000190",
             bankCode: 33,
