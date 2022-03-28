@@ -1,5 +1,6 @@
 const validateSeller = require('../validators/sellerValidator');
 const Seller = require('../models/Seller');
+const { generate } = require('@fnando/cnpj')
 
 const sellerServices = class {
     static async getById(req, res) {
@@ -42,6 +43,25 @@ const sellerServices = class {
         return new Seller(req.body);
     }
 
+    // Test: create sellers
+    static async createSellersTest(){
+        let sellers = [];
+
+        for(let i = 0; i < 10; i++){
+            const seller = new Seller({
+                seller_id: i+1,
+                name: `mcDonalds ${i}`,
+                cnpj: generate(true),
+                bankCode: Math.floor(Math.random() * 100),
+                bankAccount: Math.floor(Math.random() * 1000 + i),
+                notes: ''
+            })
+            sellers.push(seller);
+        }
+
+        return sellers;
+
+    }
 }
 
 module.exports = sellerServices;

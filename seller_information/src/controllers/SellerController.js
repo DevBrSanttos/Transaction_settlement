@@ -52,6 +52,21 @@ const SellerController = class {
         res.status(200).json({page, pageSize, totalItens, totalPages, result});
     }
 
+    
+    static async insertDataTest(req, res){
+        try {
+            const sellers = await sellerServices.createSellersTest();
+            sellers.forEach(seller => {
+                seller.save();
+            });
+            res.status(201).json();
+        } catch (err) {
+            res.status(500).json({ message: err });
+        }
+        
+        
+    }
+
 }
 
 

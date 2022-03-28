@@ -1,7 +1,7 @@
 const yup = require('yup');
 const Seller = require('../models/Seller');
-const isCnpj = require('./CNPJ');
 const defaultMessage = require('./defaultMessage');
+const { isValid } = require('@fnando/cnpj');
 
 let errors = []
 function validateSeller(){
@@ -28,7 +28,7 @@ validateSeller.prototype.sellerRequired = async (req) => {
 }
 
 validateSeller.prototype.cnpjIsValid = async (req) => {
-    if(isCnpj(req.body.cnpj))
+    if(isValid(req.body.cnpj), true)
         return true;
     
     let msg = new defaultMessage("CNPJ", "CNPJ invalid");
