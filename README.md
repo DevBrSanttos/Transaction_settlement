@@ -36,7 +36,7 @@ Desenvolvido um microsserviço com rabbitMQ capaz de calcular imposto.
 3. Volte em seu diretório raiz e inicialize o Docker com o comando `docker-compose up` ou `podman-compose up`
 4. Entre no diretôrio tax_calculator
 5. Rode o comando `node index.js` para iniciar o projeto
-6. para acessar o rabbitMQ basta utilize o link: http://localhost:15672/#/ com user: dev e password: 123456
+6. para acessar o rabbitMQ basta utilize o link: http://localhost:15672/#/ com user: **dev** e password: **123456**
 7. Caso deseje rodar um código que publica mensagens e consome com o imposto calculado, basta em um novo terminal rodar o comando `npm run test`
 
 ### Settlement
