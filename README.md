@@ -27,15 +27,32 @@ Desenvolvido uma API RestFull para realizar as funções de CRUD de um Seller
 5. Rode o comando `npm start` para iniciar o projeto
 6. Para acessar a API via swagger utilize o link: http://localhost:3000/v1/#/Sellers
 7. Caso deseje rodar os testes automatizados localizados no diretôrio test rode o comando `npm run test`
- 
- 
+
 ### Tax calculator
 Desenvolvido um microsserviço com rabbitMQ capaz de calcular imposto.
 ### - Via terminal WSL
 1. Entre no diretorio tax_calculator. 
 2. Instale as dependências do projeto com o comando `npm install`.
-3. Volte em seu diretório raiz e rode o Docker com o comando `docker-compose up` ou `podman-compose up`
+3. Volte em seu diretório raiz e inicialize o Docker com o comando `docker-compose up` ou `podman-compose up`
 4. Entre no diretôrio tax_calculator
 5. Rode o comando `node index.js` para iniciar o projeto
 6. para acessar o rabbitMQ basta utilize o link: http://localhost:15672/#/ com user: dev e password: 123456
-7. Caso deseje rodar um código que publica as mensagens e consome outras com o imposto calculado basta em um novo terminal rodar o comando `npm run test`
+7. Caso deseje rodar um código que publica mensagens e consome com o imposto calculado, basta em um novo terminal rodar o comando `npm run test`
+
+### Settlement
+Programa que une a API seller_information e o microsserviço Tax calculator, este receber as transações, e cria um arquivo final.
+### - Via terminal WSL
+1. Entre no diretorio settlement.
+2. Instale as dependências do projeto com o comando `npm install`.
+3. Rode o comando `npm start` para iniciar o projeto
+#### Rodar todo projeto e completar o ciclo
+1. Necessário está com o docker inicializado.
+2. Rode todos os projetos
+3. Para inserir dados de testes acesse as seguintes URL's:
+- http://localhost:3000/v1/sellers//dummy-data para inserir sellers no banco de seller_information
+- http://localhost:5000/v1/transactions/dummy-data para inserir transactions no banco de settlement
+4. Via postman insira a URL http://localhost:5000/v1/settlements/
+- Esta URL possui o metodo GET e POST.
+- utilize o POST para iniciar o ciclo assim gerando um documento com os dados de sellerSettlement já processados no ciclo o documento estará no diretôrio settlement/src/arquives
+- Utilize o GET para buscar todos os settlements já processados no ciclo.
+5. Caso deseje excluir todos os dados de transaction, settlement e sellerSettlement acesse a URL http://localhost:5000/v1/deleteAll
