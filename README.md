@@ -51,8 +51,8 @@ Programa que une a API seller_information e o microsserviço Tax calculator, est
 3. Para inserir dados de testes acesse as seguintes URL's:
 - http://localhost:3000/v1/sellers//dummy-data para inserir sellers no banco de seller_information
 - http://localhost:5000/v1/transactions/dummy-data para inserir transactions no banco de settlement
-4. Via postman insira a URL http://localhost:5000/v1/settlements/
+4. No postman insira a URL http://localhost:5000/v1/settlements/
 - Esta URL possui o metodo GET e POST.
-- utilize o POST para iniciar o ciclo assim gerando um documento com os dados de sellerSettlement já processados no ciclo o documento estará no diretôrio settlement/src/arquives
+- Utilize o POST para iniciar o ciclo assim gerando um documento com os dados de sellerSettlement já processados no ciclo o documento estará no diretôrio settlement/src/arquives
 - Utilize o GET para buscar todos os settlements já processados no ciclo.
 5. Caso deseje excluir todos os dados de transaction, settlement e sellerSettlement acesse a URL http://localhost:5000/v1/deleteAll
