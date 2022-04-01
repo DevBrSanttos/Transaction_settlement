@@ -1,9 +1,18 @@
-const Transaction = require('../models/Transaction');
 const TransactionServices = require('../services/TransactionServices');
 
 const TransactionController = class {
 
+    static async getTransactionsBySettlementDate(Settlement){
+        try {
+            const date = Settlement.settlementDate;
+            const transactions = await TransactionServices.getTransactionsBySettlementDate(date);
+            return transactions;
 
+        } catch (err) {
+            res.status(500).json({ message: err });
+            return
+        }
+    }
     
     
     static async insertDataTest(req, res){

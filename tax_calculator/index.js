@@ -6,10 +6,7 @@ const createCalculatorChannel = require('./src/channel/calculatorChannel');
 
 async function calculateTaxAndSendMessage(channel, message){
 
-    const newMessage = new Message(message.seller_id, message.amount);
-    console.log("Message received: ");
-    console.log(newMessage);
-
+    const newMessage = new Message(message.seller_id, message.amount, message.settlementId);
     newMessage.calculateTax();
 
      const newMessageJson = JSON.stringify(newMessage);

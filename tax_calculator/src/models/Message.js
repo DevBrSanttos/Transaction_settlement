@@ -1,8 +1,9 @@
 
 const Message = class{
-    constructor(seller_id, amount){
+    constructor(seller_id, amount, settlementId){
         this.seller_id = seller_id;
         this.amount = amount;
+        this.settlementId = settlementId;
         this.tax_value;
     }
 

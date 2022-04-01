@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 services:
   meu-mongodb:
     image: mongo:latest
@@ -7,7 +7,7 @@ services:
 
   rabbitmqTaxCalculator:
     image: rabbitmq:3.6.6-management
-    container_name: 'rabbitmqTaxCalculator'
+    container_name: "rabbitmqTaxCalculator"
     ports:
       - 5672:5672
       - 15672:15672

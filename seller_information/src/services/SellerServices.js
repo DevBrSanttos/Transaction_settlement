@@ -52,7 +52,7 @@ const sellerServices = class {
                 seller_id: i+1,
                 name: `mcDonalds ${i}`,
                 cnpj: generate(true),
-                bankCode: Math.floor(Math.random() * 100),
+                bankCode: Math.floor(Math.random() * 10 + 1),
                 bankAccount: Math.floor(Math.random() * 1000 + i),
                 notes: ''
             })
