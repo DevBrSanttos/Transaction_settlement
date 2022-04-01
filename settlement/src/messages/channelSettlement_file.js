@@ -1,14 +1,14 @@
 const createCalculatorTaxChannel = require('../connections/amqpConnection');
 const Settlement = require('../models/Settlement');
 const { updateSettlements } = require('../services/SettlementServices');
-const { createArquive } = require('../arquives/arquive');
+const { createFile } = require('../files/file');
 
 const consumerRequestSettlementFile = async () => {
     await createCalculatorTaxChannel().then((channel) => {
         channel.consume(process.env.QUEUE_SETTLEMENT_FILE_REQUEST, async msg => {
             const message = JSON.parse(msg.content.toString());
             await channel.ack(msg);
-            await createArquive(message);
+            await createFile(message);
             await updateSettlements(message);
         });
     }).catch((err) => {
